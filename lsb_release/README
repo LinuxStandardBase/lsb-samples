@@ -1,7 +1,7 @@
 This directory contains:
 
 src - directory containing the source for lsb_release 
-lsb_release.spec - the spec file for generating RPM packages for lsb_release
+lsb-release.spec - the spec file for generating RPM packages for lsb_release
 debian - directory containing the necessary configuration files for
          generating a deb packages for lsb_release
 
@@ -9,9 +9,9 @@ debian - directory containing the necessary configuration files for
 Generating a release
 --------------------
 
-1. Checkout a snapshot
+1. Checkout a tagged release (eg Release_1_1) or a snapshot
 
-cvs -d :pserver:anonymous@cvs.lsb.sourceforge.net:/cvsroot/lsb export lsb_release
+cvs -d :pserver:anonymous@cvs.lsb.sourceforge.net:/cvsroot/lsb export lsb_release Release_1_1
 
 2. Choose a version number (example commands following will assume
 1.1) and rename the src directory appropriately.
@@ -51,9 +51,12 @@ i. Move the debian directory into the renamed src directory
 
 mv debian lsb-release-1.1
 
-ii. Build the debian packages
+ii. Update the changelog file in the debian directory
+
+iii. Build the debian packages
 
 cd lsb-release-1.1
 dpkg-buildpackage -rfakeroot
 
 4. Upload the various release files to the Source Forge site.
+
