@@ -92,24 +92,24 @@ DisplayProgramVersion() {
 
 # defines the Usage for lsb_release
 Usage() {
-    echo "FSG `basename $0` v$SCRIPTVERSION print certain LSB (Linux\
+    echo "FSG `basename $0` v$SCRIPTVERSION prints certain LSB (Linux\
  Standard Base) and"
     echo "Distribution information."
     echo
     echo "Usage: `basename $0` [OPTION]..."
-    echo "With no OPTION, same as -v."
+    echo "With no OPTION specified it is the same as -v."
     echo
     echo "Options:"
     echo "  -v, --version"
-    echo "    Display version of LSB against which distribution is compliant."
+    echo "    Display the version of the LSB specification against which the distribution is compliant."
     echo "  -i, --id"
-    echo "    Display string id of distributor."
+    echo "    Display the string id of the distributor."
     echo "  -d, --description"
-    echo "    Display single line text description of distribution."
+    echo "    Display the single line text description of the distribution."
     echo "  -r, --release"
-    echo "    Display release number of distribution."
+    echo "    Display the release number of the distribution."
     echo "  -c, --codename"
-    echo "    Display codename according to distribution release."
+    echo "    Display the codename according to the distribution release."
     echo "  -a, --all"
     echo "    Display all of the above information."
     echo "  -s, --short"
