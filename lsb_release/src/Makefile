@@ -1,12 +1,11 @@
 # 
 # Makefile for lsb_release program
 #
-# Copyright (C) 2000 Free Software Group, Inc
-# Copyright (C) 2002 Free Software Group, Inc
+# Copyright (C) 2000, 2002, 2004 Free Standards Group, Inc
 # 
 # Christopher Yeoh <cyeoh@samba.org>
 #
-# This is $Revision: 1.6 $
+# This is $Revision: 1.7 $
 
 # Config
 

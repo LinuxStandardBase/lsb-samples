@@ -1,18 +1,24 @@
 [FILES]
 
 If the installation is LSB compliant, the \fB"/etc/lsb-release"\fR
-file should contain the \fBLSB_VERSION\fR field. The value of the
-field should be the version number of the LSB specification against
-which the installation is compliant. If the installation is not
+file should contain the \fBLSB_VERSION\fR field. 
+The value of the field should be a colon separated list of
+supported module versions indicating the LSB specification 
+modules to which the installation is compliant. If the installation is not
 compliant, the above field should 
 .B not
 be present.
 
 Optional fields are \fBDISTRIB_ID\fR, \fBDISTRIB_RELEASE\fR,
 \fBDISTRIB_CODENAME\fR, \fBDISTRIB_DESCRIPTION\fR and can be used to
-overwrite information which is parsed from the next file.
+override information which is parsed from the 
+\fB"/etc/\fIdistrib\fB-release"\fR file.
+
+If the \fB"/etc/lsb-release.d"\fR directory exists, it is
+searched for filenames which are taken as additional module-version
+strings to add to \fBLSB_VERSION\fR.
  
-The \fB"/etc/[distrib]-release"\fR file contains a description line
+The \fB"/etc/\fIdistrib\fB-release"\fR file contains a description line
 which is parsed to get information (especially on currently non-LSB
 compliant systems).
 
@@ -20,29 +26,39 @@ The required line style is:
 .br 
 "\fIDistributor\fR \fBrelease\fR \fIx.x\fR \fB(\fR\fICodename\fR\fB)\fR"
 
-Where \fIDistributor\fR can be a couple of words, but then concatenated (i.e. Linux Foo BarLinux Linux -> FooBarLinux),
+Where \fIDistributor\fR can be a couple of words, but then concatenated
+(i.e. Linux Foo BarLinux Linux -> FooBarLinux),
 .br
 \fIx.x\fR starts with a digit followed by any non-blank characters,
 \fICodename\fR will also be concatenated (blanks cleanup only).
 
-And \fBrelease\fR is a keyword not to be used in \fBDISTRIB_DESCRIPTION\fR if you don't want to overwrite "/etc/[distrib]-release" data.
+\fBrelease\fR may not be used as a keyword in \fBDISTRIB_DESCRIPTION\fR
+if you don't want to override \fB"/etc/\fIdistrib\fB-release"\fR data.
 
-\fBNotice:\fR To support the \fBDebian\fR distributions' lack of information (see "/etc/debian_version" file) some have been directly added into the \fBlsb_release\fR script.
+\fBNotice:\fR To support the \fBDebian\fR distributions' lack of
+information (see "/etc/debian_version" file) some have been directly
+added into the \fBlsb_release\fR script.
 
 [EXAMPLES]
-.B The "/etc/lsb-release" file contains:
+If the "\fB/etc/lsb-release\fR" file contains:
 
-LSB_VERSION="1.0"
+LSB_VERSION="core-2.0-ia64:core-2.0-noarch"
 .br
 DISTRIB_DESCRIPTION="I enjoy using my distrib"
 
-.B And the "/etc/foobar-release" file contains:
+and the "\fB/etc/lsb-release.d\fR" directory contains:
+
+graphics-2.0-ia64    graphics-2.0-noarch
+
+and the "\fB/etc/foobar-release\fP" file contains:
 
 My Linux Distrib release 1.0RC4 (TryIt)
 
+Then the results of various options will be:
+
 .B $ ./lsb_release --all
 .br
-LSB Version:    core-2.0-ia32:graphics-2.0-ia32
+LSB Version:    core-2.0-ia64:core-2.0-noarch:graphics-2.0-ia64:graphics-2.0-noarch
 .br
 Distributor ID: MyDistrib
 .br
@@ -56,8 +72,9 @@ Codename:       TryIt
 .br
 1.0 MyDistrib "I enjoy using my distrib" 1.0RC4 TryIt
 
-Then simply without the "/etc/lsb-release" file, that means result on a \fBnon-LSB\fR compliant distrib:
-.br
+If the "/etc/lsb-release" file is absent (indicating this is
+not an LSB compliant distribution), the result will be:
+
 .B $ ./lsb_release -a
 .br
 LSB Version:    n/a
@@ -71,5 +88,6 @@ Release:        1.0RC4
 Codename:       TryIt
 
 [REPORTING BUGS]
-Report bugs to <mdomi@users.sourceforge.net>.
-Include a complete, self contained example that will allow the bug to be reproduced, and say which version of lsb_release you are using.
+Report bugs at http://bugs.linuxbase.org.
+Please include a complete, self contained example that will allow the
+bug to be reproduced, and say which version of lsb_release you are using.

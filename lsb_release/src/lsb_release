@@ -1,9 +1,18 @@
 #!/bin/sh
 # About:   This shell script is the lsb_release implementation,
 # Version: see SCRIPTVERSION (in the Declarations section)
-# Licence: GPL (latest version), Free Software Group, Inc
+# Licence: GPL (latest version), Free Standards Group, Inc
 # Author:  Dominique MASSONIE <mdomi@users.sourceforge.net>
 # Date:    September 27th, 2000
+#
+# * Changes in 2.0
+# - Support LSB 2.0 module layout (Mats Wichmann)
+#   The LSB_VERSION is now a colon-separated field of supported module versions
+#   An /etc/lsb-release.d is searched for modules beyond the core.
+#   Only the filenames in this directory is looked at, those names are added
+#   to LSB_VERSION.  This allows module support to be handled easily by
+#   package install/removal without a need to edit lsb-release on the fly.
+# - Correct license: FSG == Free Standards Group, Inc.
 #
 # * Changes in 1.4
 # - "awk" not needed anymore (Loic Lefort)
@@ -21,17 +30,18 @@
 # - LSB_VERSION is no longer required in /etc/lsb-release file
 # 
 # * Changes in 1.1
-# - removed some bash-ism and typos (me)
+# - removed some bash-ism and typos
 #   Notice: script remains broken with ash because of awk issues
-# - changed licence to FSG - "Free Software Group, Inc" (me)
-# - fixed problem with --short single arg call (me)
-# - changed Debian specifics, codename anticipates release num (me)
+# - changed licence to FSG - "Free Software Group, Inc"
+# - fixed problem with --short single arg call
+# - changed Debian specifics, codename anticipates release num
 #
 # Description:
-# Collect informations from sourceable /etc/lsb-release file (present on
+# Collect information from sourceable /etc/lsb-release file (present on
 # LSB-compliant systems) : LSB_VERSION, DISTRIB_ID, DISTRIB_RELEASE,
-# DISTRIB_CODENAME, DISTRIB_DESCRIPTION (all optional).
-# Then (if needed) find and parse the /etc/[distro]-release file.
+# DISTRIB_CODENAME, DISTRIB_DESCRIPTION (all optional)
+# Then (if needed) find and add names from /etc/lsb-release.d
+# Then (if needed) find and parse the /etc/[distro]-release file
 
 
 ###############################################################################
@@ -39,11 +49,12 @@
 ###############################################################################
 
 # This script version
-SCRIPTVERSION="1.4"
+SCRIPTVERSION="2.0"
 
 # Defines the data files
 INFO_ROOT="/etc"                              # directory of config files
 INFO_LSB_FILE="lsb-release"                   # where to get LSB version
+INFO_LSB_DIR="lsb-release.d"                  # where to get LSB addon modules
 INFO_DISTRIB_SUFFIX="release"                 # <distrib>-<suffix>
 ALTERNATE_DISTRIB_FILE="/etc/debian_version"  # for Debian [based distrib]
 ALTERNATE_DISTRIB_NAME="Debian"               #     "
@@ -79,13 +90,13 @@ DESCSTR_DELI="release"
 DisplayProgramVersion() { 
     echo "FSG `basename $0` v$SCRIPTVERSION"
     echo
-    echo "Copyright (C) 2000 Free Software Group, Inc."
+    echo "Copyright (C) 2000, 2002, 2004 Free Standards Group, Inc."
     echo "This is free software; see the source for copying conditions.  There\
  is NO"
     echo "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR\
  PURPOSE."
     echo
-    echo "Written by Dominique MASSONIE."
+    echo "Originally written by Dominique MASSONIE."
 
     exit $EXIT_STATUS
 }
@@ -168,7 +179,19 @@ GetLSBInfo() {
         # should init at least LSB_VERSION
         . "$INFO_ROOT/$INFO_LSB_FILE"
     fi
-    [ -z "$LSB_VERSION" ] && LSB_VERSION=$MSG_NA
+    if [ -z "$LSB_VERSION" ]
+    then
+	LSB_VERSION=$MSG_NA
+    else
+	# if we found LSB_VERSION, continue to look in directory
+	if [ -d "$INFO_ROOT/$INFO_LSB_DIR" ]
+	then
+	    for tag in "$INFO_ROOT/$INFO_LSB_DIR/"*
+	    do
+		LSB_VERSION=$LSB_VERSION:`basename $tag`
+	    done
+	fi
+    fi
 }
 
 # Get the whole distrib information string (from ARG $1 file)
