@@ -62,7 +62,7 @@ DESCSTR_DELI="release"
 #     FUNCTIONS
 ###############################################################################
 
-function DisplayProgramVersion() { 
+DisplayProgramVersion() { 
     echo "FSG `basename $0` $SCRIPTVERSION"
     echo
     echo "Copyright (C) 2000 Free Software Group, Inc."

@@ -21,7 +21,8 @@
 # Available from ftp://ftp.gnu.org/gnu/help2man/
 
 # This has been modified by Chris Yeoh <cyeoh@linuxcare.com.au> to
-# handle non 
+# handle FSG programs and those which don't support --version
+# to display the version
 
 use 5.004;
 use strict;
