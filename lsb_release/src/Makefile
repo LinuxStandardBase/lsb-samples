@@ -2,13 +2,19 @@
 # Makefile for lsb_release program
 #
 # Copyright (C) 2000 Free Software Group, Inc
+# Copyright (C) 2002 Free Software Group, Inc
 # 
-# Christopher Yeoh <cyeoh@linuxcare.com>
+# Christopher Yeoh <cyeoh@samba.org>
 #
-# This is $Revision: 1.5 $
+# This is $Revision: 1.6 $
 
 # Config
+
+ifndef INSTALL_ROOT
 prefix=/usr/local
+else
+prefix=$(INSTALL_ROOT)
+endif
 mandir=${prefix}/man
 
 all: man
