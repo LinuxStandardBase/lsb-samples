@@ -209,7 +209,7 @@ EASE ($DISTRIB_CODENAME)"
             || [ -n "$(echo $DISTRIB_DESCRIPTION |                            \
                        sed -e "s/.*$DESCSTR_DELI.*//")" ]
         then
-            TMP_DISTRIB_DESC=$(head -1 $FILENAME 2>/dev/null)
+            TMP_DISTRIB_DESC=$(head -n 1 $FILENAME 2>/dev/null)
             [ -z "$DISTRIB_DESCRIPTION" ]                                     \
                 && DISTRIB_DESCRIPTION=$TMP_DISTRIB_DESC
         else
@@ -252,7 +252,7 @@ GetDistribInfo() {
                    -and ! -name $INFO_LSB_FILE                                \
                    -and -type f                                               \
                    2>/dev/null                                                \
-                   | head -1 ) # keep one of the files found (if many)
+                   | head -n 1 ) # keep one of the files found (if many)
         fi
         InitDistribInfo $CHECKFIRST
     fi
