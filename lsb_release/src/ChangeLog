@@ -1,0 +1,5 @@
+2000-11-06  Christopher Yeoh  <cyeoh@linuxcare.com.au>
+
+	* Makefile (lsb_release.1.gz): Compress with -9
+
+	* ChangeLog: Add changelog file
