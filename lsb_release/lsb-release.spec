@@ -5,12 +5,12 @@
 #	Red Hat Package Manager (RPM) file for LSB
 #
 Summary: Linux Standard Base tools
-Name: lsb_release
+Name: lsb-release
 Version: 1.1
 Release: 1
 Prefix: /opt
 Copyright: GPL
-Source: lsb-release-1.0.tgz
+Source: lsb-release-1.1.tgz
 Group:  System/Tools
 URL:  http://www.linuxbase.org/
 Vendor: Linux Standard Base
