@@ -1,0 +1,7 @@
+lsb-release for Debian
+----------------------
+
+This version of lsb-release may not work with versions
+of sh that are not fully posix compliant.
+
+ -- Christopher Yeoh <cyeoh@linuxcare.com.au>, Wed, 27 Sep 2000 12:07:55 +1100

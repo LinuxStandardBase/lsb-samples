@@ -1,0 +1,5 @@
+# Automatically added by dh_installdocs
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/doc/lsb-release ]; then
+	rm -f /usr/doc/lsb-release
+fi
+# End automatically added section

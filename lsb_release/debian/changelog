@@ -1,0 +1,9 @@
+lsb-release (1.0-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Christopher Yeoh <cyeoh@linuxcare.com.au>  Wed, 27 Sep 2000 12:07:55 +1100
+
+Local variables:
+mode: debian-changelog
+End:

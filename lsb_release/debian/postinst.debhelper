@@ -1,0 +1,7 @@
+# Automatically added by dh_installdocs
+if [ "$1" = "configure" ]; then
+	if [ -d /usr/doc -a ! -e /usr/doc/lsb-release -a -d /usr/share/doc/lsb-release ]; then
+		ln -sf ../share/doc/lsb-release /usr/doc/lsb-release
+	fi
+fi
+# End automatically added section

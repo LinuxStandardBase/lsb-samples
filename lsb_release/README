@@ -1,0 +1,59 @@
+This directory contains:
+
+src - directory containing the source for lsb_release 
+lsb_release.spec - the spec file for generating RPM packages for lsb_release
+debian - directory containing the necessary configuration files for
+         generating a deb packages for lsb_release
+
+
+Generating a release
+--------------------
+
+1. Checkout a snapshot
+
+cvs -d :pserver:anonymous@cvs.lsb.sourceforge.net:/cvsroot/lsb export lsb_release
+
+2. Choose a version number (example commands following will assume
+1.1) and rename the src directory appropriately.
+
+cd lsb_release
+mv src lsb-release-1.1
+
+3a. Create the tarball release
+
+tar cvfz lsb-release-1.1.tar.gz lsb-release-1.1
+
+3b. Create the rpm release
+
+i. Create a tarball
+
+tar cvfz lsb-release-1.1.tgz lsb-release-1.1
+
+ii. Modify the spec file appropriately (if the version number has
+changed, change the Version and Source fields). These changes should
+later be checked into CVS.
+
+iii. Build the source and binary RPM package (exact details may vary
+if not building on a Red Hat system)
+
+cp lsb_release.spec /usr/src/redhat/SPECS
+mv lsb-release-1.1.tgz /usr/src/redhat/SOURCES
+rpm -ba /usr/src/redhat/SPECS/lsb_release.spec
+
+This should result in the following files being generated:
+
+/usr/src/redhat/RPMS/noarch/lsb-release-1.1-1.noarch.rpm
+/usr/src/redhat/SRPMS/lsb-release-1.1-1.src.rpm
+
+3c. Create the deb package release
+
+i. Move the debian directory into the renamed src directory
+
+mv debian lsb-release-1.1
+
+ii. Build the debian packages
+
+cd lsb-release-1.1
+dpkg-buildpackage -rfakeroot
+
+4. Upload the various release files to the Source Forge site.
