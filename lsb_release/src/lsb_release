@@ -1,4 +1,4 @@
-#!/bin/ash
+#!/bin/sh
 # About:   This shell script is the lsb_release implementation,
 # Version: see SCRIPTVERSION (in the Declarations section)
 # Licence: GPL (latest version), Free Software Group, Inc
@@ -166,7 +166,7 @@ GetLSBInfo() {
     if [ -f "$INFO_ROOT/$INFO_LSB_FILE" ]
     then
         # should init at least LSB_VERSION
-        source "$INFO_ROOT/$INFO_LSB_FILE"
+        . "$INFO_ROOT/$INFO_LSB_FILE"
     fi
     [ -z "$LSB_VERSION" ] && LSB_VERSION=$MSG_NA
 }
