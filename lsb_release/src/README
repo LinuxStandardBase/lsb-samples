@@ -1,0 +1,41 @@
+This dir contains le lsb_release script and the required
+ones to build the associated Man pages.
+
+lsb_release : version 1.0
+help2man    : the GNU script to build Man from --help output
+lsb_release.examples : the Man style add-on for the pages
+doman       : the small script to automate creation
+readme      : this file
+lsb_release.spec: The RPM spec file
+
+Notice: the doman script is required to modify the --version
+behavior of the lsb_release script to match help2man needs.
+
+Regards,
+   
+-- Dominique
+
+To build and package lsb_release:
+
+1) Extract lsb_release from CVS:
+
+cvs -d :pserver:anonymous@cvs.lsb.sourceforge.net:/cvsroot/lsb checkout src
+
+2) Create a tar(1) ball.
+
+cd src/bin
+mv lsb_release lsb_release-1.0
+tar czvf /usr/src/redhat/SOURCES/lsb_release-1.0.tgz lsb_release-1.0
+
+3) RPM build the package
+
+cp lsb_release-1.0/lsb_release.spec /usr/src/redhat/SPECS
+cd /usr/src/redhat/SPECS
+rpm -ba lsb_release.spec
+
+4) Install the RPM
+
+rpm -i /usr/src/redhat/RPMS/i386/lsb_release-1.0-1.i386.rpm
+
+George (gk4)
+
