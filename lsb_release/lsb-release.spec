@@ -1,22 +1,28 @@
 #
 #	Copyright 1999, International Business Machines, Inc.
 #	George Kraft IV (gk4@us.ibm.com)
+#       Christopher Yeoh (cyeoh@linuxcare.com)
 #
-#	Red Hat Package Manager (RPM) file for LSB
+#	Red Hat Package Manager (RPM) file for lsb-release
 #
+# Note that in order to create a package which is LSB compliant
+# the value of the _defaultdocdir macro should be /usr/share/doc
+# and _mandir should be /usr/share/man
+#
+
 Summary: Linux Standard Base tools
 Name: lsb-release
-Version: 1.3
+Version: 1.4
 Release: 1
-Prefix: /
 Copyright: GPL
 Source: lsb-release-1.3.tgz
 Group:  System/Tools
 URL:  http://www.linuxbase.org/
 Vendor: Linux Standard Base
-Packager: George Kraft IV <gk4@us.ibm.com>
+Packager: Christopher Yeoh <cyeoh@linuxcare.com>
 BuildArchitectures: noarch
-BuildRoot: /var/tmp/%{name}-root
+BuildRoot: %{_tmppath}/%{name}-root
+Prefix: %{_prefix}
 
 %description
 Linux Standard Base (LSB) tools.
@@ -30,19 +36,27 @@ rm -rf $RPM_BUILD_ROOT
 make
 
 %install
-make prefix=${RPM_BUILD_ROOT}%{prefix}/ mandir=${RPM_BUILD_ROOT}/usr/share/man/ install 
-mkdir -p ${RPM_BUILD_ROOT}%{prefix}/usr/share/doc
-cp lsb-release.template ${RPM_BUILD_ROOT}%{prefix}/usr/share/doc/
+make prefix=%buildroot% mandir=%buildroot/%{_mandir} install 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%{prefix}/bin/lsb_release
-%{prefix}/usr/share/man/man1/lsb_release.1.gz
-%{prefix}/usr/share/doc/lsb-release.template
+%defattr(-,root,root)
+%doc lsb-release.template
+/bin/lsb_release
+%{_mandir}/man1/lsb_release.1*
 
 %changelog
+* Mon Nov  6 2000 Christopher Yeoh <cyeoh@linuxcare.com>
+- Repackage for version 1.4
+- Add comments about creating an LSB compliant package.
+
+* Thu Nov  2 2000 Chmouel Boudjnah <chmouel@mandrakesoft.com>
+- add %defattr to fix build as non root.
+- fix %file for non rh distribution.
+- macros.
+
 * Mon Oct 30 2000 Christopher Yeoh <cyeoh@linuxcare.com>
 - Repackage so lsb_release goes in /bin
 
@@ -56,3 +70,4 @@ rm -rf $RPM_BUILD_ROOT
 - Clean up script not to trample over currently installed package
 - Changes to use new makefile bundled with lsb_release tarball
 - Fixes bugs in post commands and adds post uninstall commands
+
