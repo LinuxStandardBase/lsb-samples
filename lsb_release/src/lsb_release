@@ -28,7 +28,7 @@
 ###############################################################################
 
 # This script version
-SCRIPTVERSION="1.1"
+SCRIPTVERSION="1.2"
 
 # Defines the data files
 INFO_ROOT="/etc"                              # directory of config files
