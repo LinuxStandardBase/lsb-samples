@@ -15,7 +15,7 @@ Name: lsb-release
 Version: 1.4
 Release: 1
 Copyright: GPL
-Source: lsb-release-1.3.tgz
+Source: lsb-release-1.4.tgz
 Group:  System/Tools
 URL:  http://www.linuxbase.org/
 Vendor: Linux Standard Base
