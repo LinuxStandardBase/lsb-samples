@@ -42,7 +42,7 @@ My Linux Distrib release 1.0RC4 (TryIt)
 
 .B $ ./lsb_release --all
 .br
-LSB Version:    1.0
+LSB Version:    lsb-2.0-ia32:workstation-2.0-ia32:server-2.0-ia32
 .br
 Distributor ID: MyDistrib
 .br
