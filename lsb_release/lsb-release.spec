@@ -36,7 +36,7 @@ rm -rf $RPM_BUILD_ROOT
 make
 
 %install
-make prefix=%buildroot% mandir=%buildroot/%{_mandir} install 
+make prefix=%buildroot mandir=%buildroot/%{_mandir} install 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
