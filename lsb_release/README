@@ -9,6 +9,11 @@ debian - directory containing the necessary configuration files for
 Generating a release
 --------------------
 
+The man page for lsb_release is automatically created by a modified
+version of the help2man program when the packages are constructed. The
+Makefile in the src subdirectory contains the command line arguments
+needed. The modified version of help2mn is included in this package.
+
 1. Checkout a tagged release (eg Release_1_1) or a snapshot
 
 cvs -d :pserver:anonymous@cvs.lsb.sourceforge.net:/cvsroot/lsb export lsb_release Release_1_1

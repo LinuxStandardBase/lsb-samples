@@ -1,13 +1,11 @@
-This dir contains the lsb_release script and the required
-ones to build the associated man pages.
+LSB version query program (lsb_release) by Dominique Massonie
+(mdomi@users.sourceforge.net)
 
-lsb_release : version 1.4
-help2man    : the GNU script to build Man from --help output
-README      : this file
-Makefile    : Makefile for creating the man page
-lsb_release.examples : the Man style add-on for the pages
-lsb-release.template : the sample "/etc/lsb-release" file.
+This program forms part of the required functionality of the LSB
+(Linux Standard Base) specification.
 
-Regards,
-   
-    -- Dominique
+The program queries the installed state of the distribution to display
+certain properties such as the version of the LSB against which the
+distribution claims compliance as well. It can also attempt to display
+the name and release of the distribution along with an identifier of
+who produces the distribution.

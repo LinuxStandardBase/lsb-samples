@@ -25,7 +25,17 @@ BuildRoot: %{_tmppath}/%{name}-root
 Prefix: %{_prefix}
 
 %description
-Linux Standard Base (LSB) tools.
+LSB version query program
+
+This program forms part of the required functionality of
+the LSB (Linux Standard Base) specification.
+
+The program queries the installed state of the distribution
+to display certain properties such as the version of the
+LSB against which the distribution claims compliance as 
+well. It can also attempt to display the name and release
+of the distribution along with an identifier of who produces
+the distribution.
 
 %prep
 
@@ -48,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/lsb_release.1*
 
 %changelog
+* Tue Jan  2 2001 Christopher Yeoh <cyeoh@linuxcare.com>
+- Update description of package
+
 * Mon Nov  6 2000 Christopher Yeoh <cyeoh@linuxcare.com>
 - Repackage for version 1.4
 - Add comments about creating an LSB compliant package.
