@@ -4,6 +4,10 @@
 # Licence: GPL (latest version), Free Software Group, Inc
 # Author:  Dominique MASSONIE <mdomi@users.sourceforge.net>
 # Date:    September 27th, 2000
+#
+# * Changes in 1.2
+# - Fixed more bash'isms
+# - LSB_VERSION is no longer required in /etc/lsb-release file
 # 
 # * Changes in 1.1
 # - removed some bash-ism and typos (me)
@@ -14,8 +18,8 @@
 #
 # Description:
 # Collect informations from sourceable /etc/lsb-release file (present on
-# LSB-compliant systems) : LSB_VERSION (required) and (optional)
-# DISTRIB_ID, DISTRIB_RELEASE, DISTRIB_CODENAME, DISTRIB_DESCRIPTION.
+# LSB-compliant systems) : LSB_VERSION, DISTRIB_ID, DISTRIB_RELEASE,
+# DISTRIB_CODENAME, DISTRIB_DESCRIPTION (all optional).
 # Then (if needed) find and parse the /etc/[distro]-release file.
 
 
@@ -41,10 +45,8 @@ ERROR_USER="1"                            # program misuse
 ERROR_PROGRAM="2"                         # internal error
 ERROR_NOANSWER="3"                        # all required info not available
                                           # typically non LSB compliant distro!
-ERROR_LSBBADFILE="4"                      # bad "lsb-release" content
 
 # Defines our messages
-MSG_LSBBADFILE="Bad $INFO_ROOT/$INFO_LSB_FILE file, field LSB_VERSION missing."
 MSG_LSBVER="LSB Version:\t"
 MSG_DISTID="Distributor ID:\t"
 MSG_DISTDESC="Description:\t"
@@ -110,7 +112,7 @@ EnhancedGetopt() {
     if [ $? = 4 ]
     then                                  # Yes, advanced args ALLOWED
         OPT=$(getopt -o acdhirsvp                                             \
-              --long all,codename,description,help,id,release,short,version,program_version   \
+--long all,codename,description,help,id,release,short,version,program_version \
               -n 'lsb_release'                                                \
               -- "$@")
     else                                  # No, advanced args NOT allowed
@@ -149,11 +151,8 @@ GetLSBInfo() {
     then
         # should init at least LSB_VERSION
         source "$INFO_ROOT/$INFO_LSB_FILE"
-        [ -z "$LSB_VERSION" ] && echo "$MSG_LSBBADFILE"                       \
-            && exit $ERROR_LSBBADFILE
-    else
-        LSB_VERSION=$MSG_NA        # Exit code remains Ok (not ERROR_NOANSWER)
     fi
+    [ -z "$LSB_VERSION" ] && LSB_VERSION=$MSG_NA
 }
 
 # Get the whole distrib information string (from ARG $1 file)
