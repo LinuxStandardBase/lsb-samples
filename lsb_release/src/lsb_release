@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/ash
 # About:   This shell script is the lsb_release implementation,
 # Version: see SCRIPTVERSION (in the Declarations section)
 # Licence: GPL (latest version), Free Software Group, Inc

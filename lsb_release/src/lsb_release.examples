@@ -1,7 +1,7 @@
 [FILES]
 
 If the installation is LSB compliant, the \fB"/etc/lsb-release"\fR
-file should contain the \fBLSB_REVISION\fR field. The value of the
+file should contain the \fBLSB_VERSION\fR field. The value of the
 field should be the version number of the LSB specification against
 which the installation is compliant. If the installation is not
 compliant, the above field should 

@@ -1,11 +1,15 @@
+2000-12-13  Christopher Yeoh  <cyeoh@linuxcare.com.au>
+
+	* lsb_release.examples: Fix mistakes in documentation
+
 2000-12-11  Christopher Yeoh  <cyeoh@linuxcare.com.au>
 
 	* lsb_release.examples: Update documentation. Explicitly state
-	that LSB_REVISION should not be set if the distribution is not LSB 
+	that LSB_VERSION should not be set if the distribution is not LSB 
 	compliant.
 
 	* lsb_release: Various fixes to run with less featured shells
-	and removal of dependency on awk (Dominque Massonie et al).
+	and removal of dependency on awk (Dominique Massonie et al).
 
 2000-11-06  Christopher Yeoh  <cyeoh@linuxcare.com.au>
 
