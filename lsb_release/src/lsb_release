@@ -5,6 +5,9 @@
 # Author:  Dominique MASSONIE <mdomi@users.sourceforge.net>
 # Date:    September 27th, 2000
 #
+# * Changes in 1.3
+# - No changes in script, only in build infrastructure
+#
 # * Changes in 1.2
 # - Fixed more bash'isms
 # - LSB_VERSION is no longer required in /etc/lsb-release file
@@ -28,7 +31,7 @@
 ###############################################################################
 
 # This script version
-SCRIPTVERSION="1.2"
+SCRIPTVERSION="1.3"
 
 # Defines the data files
 INFO_ROOT="/etc"                              # directory of config files
