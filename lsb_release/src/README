@@ -1,7 +1,7 @@
 This dir contains the lsb_release script and the required
 ones to build the associated man pages.
 
-lsb_release : version 1.1
+lsb_release : version 1.3
 help2man    : the GNU script to build Man from --help output
 lsb_release.examples : the Man style add-on for the pages
 readme      : this file
