@@ -1,9 +1,15 @@
 # 
 # Makefile for lsb_release program
 #
+# Copyright (C) 2000 Free Software Group, Inc
+# 
+# Christopher Yeoh <cyeoh@linuxcare.com>
+#
+# This is $Revision: 1.4 $
 
 # Config
-prefix=/opt/lsb
+prefix=/usr/local
+mandir=${prefix}/man
 
 all: man
 
@@ -14,5 +20,5 @@ lsb_release.1.gz: lsb_release
 	@gzip -f lsb_release.1
 
 install: all
-	install -D -m 644 lsb_release.1.gz ${prefix}/man/man1/lsb_release.1.gz
+	install -D -m 644 lsb_release.1.gz ${mandir}/man1/lsb_release.1.gz
 	install -D -m 755 lsb_release ${prefix}/bin/lsb_release

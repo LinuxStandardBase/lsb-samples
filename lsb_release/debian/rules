@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
-# Sample debian/rules that uses debhelper.
-# GNU copyright 1997 to 1999 by Joey Hess.
+# Debian rules file for lsb-release package
+#
+# Christopher Yeoh <cyeoh@linuxcare.com>
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
@@ -31,7 +32,7 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package into debian/tmp.
-	$(MAKE) install prefix=`pwd`/debian/tmp/opt/lsb
+	$(MAKE) install prefix=`pwd`/debian/tmp/ mandir=`pwd`/debian/tmp/usr/share/man
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -41,8 +42,6 @@ binary-indep: build install
 	dh_installdocs
 	dh_installmanpages
 	dh_installchangelogs 
-	dh_link opt/lsb/bin/lsb_release opt/bin/lsb_release
-	dh_link opt/lsb/man/man1/lsb_release.1.gz opt/man/man1/lsb_release.1.gz
 	dh_compress
 	dh_fixperms
 	# You may want to make some executables suid here.

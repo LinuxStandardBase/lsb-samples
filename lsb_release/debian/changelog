@@ -1,3 +1,10 @@
+lsb-release (1.3-1) unstable; urgency=low
+
+  * Repackage so it lsb_release goes in /bin and
+    man page in /usr/share/man
+
+ -- Christopher Yeoh <cyeoh@linuxcare.com.au>  Mon, 30 Oct 2000 14:27:31 +1100
+
 lsb-release (1.2-1) unstable; urgency=low
 
   * Update for 1.2 release of lsb_release

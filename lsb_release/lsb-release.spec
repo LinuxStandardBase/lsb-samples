@@ -6,9 +6,9 @@
 #
 Summary: Linux Standard Base tools
 Name: lsb-release
-Version: 1.2
+Version: 1.3
 Release: 1
-Prefix: /opt
+Prefix: /
 Copyright: GPL
 Source: lsb-release-1.2.tgz
 Group:  System/Tools
@@ -30,17 +30,17 @@ rm -rf $RPM_BUILD_ROOT
 make
 
 %install
-make prefix=${RPM_BUILD_ROOT}%{prefix}/lsb install 
-mkdir -p ${RPM_BUILD_ROOT}%{prefix}/lsb/doc
-cp lsb-release.template ${RPM_BUILD_ROOT}%{prefix}/lsb/doc/
+make prefix=${RPM_BUILD_ROOT}%{prefix}/bin mandir=${RPM_BUILD_ROOT}/usr/share/man/ install 
+mkdir -p ${RPM_BUILD_ROOT}%{prefix}/usr/share/doc
+cp lsb-release.template ${RPM_BUILD_ROOT}%{prefix}/usr/share/doc/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%{prefix}/lsb/bin/lsb_release
-%{prefix}/lsb/man/man1/lsb_release.1.gz
-%{prefix}/lsb/doc/lsb-release.template
+%{prefix}/bin/lsb_release
+%{prefix}/usr/share/man/man1/lsb_release.1.gz
+%{prefix}/usr/share/doc/lsb-release.template
 
 %post
 P=$RPM_INSTALL_PREFIX
@@ -51,9 +51,12 @@ ln -fs $P/lsb/man/man1/lsb_release.1.gz $P/man/man1/
 
 %postun
 rm -f $RPM_INSTALL_PREFIX/bin/lsb_release
-rm -f $RPM_INSTALL_PREFIX/man/man1/lsb_release/lsb_release.1.gz
+rm -f $RPM_INSTALL_PREFIX/usr/share/man/man1/lsb_release/lsb_release.1.gz
 
 %changelog
+* Mon Oct 30 2000 Christopher Yeoh <cyeoh@linuxcare.com>
+- Repackage so lsb_release goes in /bin
+
 * Sat Oct 21 2000 Christopher Yeoh <cyeoh@linuxcare.com>
 - Changes for 1.2 release of lsb_release
 
