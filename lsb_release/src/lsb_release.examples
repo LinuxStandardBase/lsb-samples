@@ -1,13 +1,20 @@
 [FILES]
-The \fB"/etc/lsb-release"\fR file should contain the following fields:
- 
-\fBLSB_VERSION="\fR1.0\fB"\fR (REQUIRED)
 
-And some optional fields like 
-\fBDISTRIB_ID\fR, \fBDISTRIB_RELEASE\fR, \fBDISTRIB_CODENAME\fR, \fBDISTRIB_DESCRIPTION\fR
-to overwrite content parsed from next file.
+If the installation is LSB compliant, the \fB"/etc/lsb-release"\fR
+file should contain the \fBLSB_REVISION\fR field. The value of the
+field should be the version number of the LSB specification against
+which the installation is compliant. If the installation is not
+compliant, the above field should 
+.B not
+be present.
+
+Optional fields are \fBDISTRIB_ID\fR, \fBDISTRIB_RELEASE\fR,
+\fBDISTRIB_CODENAME\fR, \fBDISTRIB_DESCRIPTION\fR and can be used to
+overwrite information which is parsed from the next file.
  
-The \fB"/etc/[distrib]-release"\fR file contains a description line parsed to get information (especially on non-LSB compliant system).
+The \fB"/etc/[distrib]-release"\fR file contains a description line
+which is parsed to get information (especially on currently non-LSB
+compliant systems).
 
 The required line style is:
 .br 
