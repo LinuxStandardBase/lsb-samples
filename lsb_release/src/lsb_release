@@ -122,7 +122,7 @@ Usage() {
     echo "Distribution information."
     echo
     echo "Usage: `basename $0` [OPTION]..."
-    echo "With no OPTION specified it is the same as -v."
+    echo "With no OPTION specified defaults to -v."
     echo
     echo "Options:"
     echo "  -v, --version"
@@ -138,7 +138,7 @@ Usage() {
     echo "  -a, --all"
     echo "    Display all of the above information."
     echo "  -s, --short"
-    echo "    Display all of the above information in short output format."
+    echo "    Use short output format for information requested by other options (or version if none)."
     echo "  -h, --help"
     echo "    Display this message."
 
