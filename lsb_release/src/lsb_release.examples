@@ -1,7 +1,7 @@
 [FILES]
 The \fB"/etc/lsb-release"\fR file should contain the following fields:
  
-\fBLSB_VERSION="1.0"\fR (REQUIRED)
+\fBLSB_VERSION="\fR1.0\fB"\fR (REQUIRED)
 
 And some optional fields like 
 \fBDISTRIB_ID\fR, \fBDISTRIB_RELEASE\fR, \fBDISTRIB_CODENAME\fR, \fBDISTRIB_DESCRIPTION\fR
@@ -20,7 +20,7 @@ Where \fIDistributor\fR can be a couple of words, but then concatenated (i.e. Li
 
 And \fBrelease\fR is a keyword not to be used in \fBDISTRIB_DESCRIPTION\fR if you don't want to overwrite "/etc/[distrib]-release" data.
 
-\fBNotice:\fR To support the \fBDebian\fR distributions' lak of information (see "/etc/debian_version" file) some have been directly added into the \fBlsb_release\fR script.
+\fBNotice:\fR To support the \fBDebian\fR distributions' lack of information (see "/etc/debian_version" file) some have been directly added into the \fBlsb_release\fR script.
 
 [EXAMPLES]
 .B The "/etc/lsb-release" file contains:
@@ -65,4 +65,4 @@ Codename:       TryIt
 
 [REPORTING BUGS]
 Report bugs to <mdomi@users.sourceforge.net>.
-Include a complete, selfcontained example that will allow the bug to be reproduced, and say which version of lsb_release you are using.
+Include a complete, self contained example that will allow the bug to be reproduced, and say which version of lsb_release you are using.

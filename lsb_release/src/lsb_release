@@ -62,6 +62,18 @@ DESCSTR_DELI="release"
 #     FUNCTIONS
 ###############################################################################
 
+function DisplayProgramVersion() { 
+    echo "GNU ${0##*/} $SCRIPTVERSION"
+    echo
+    echo "Copyright (C) 2000 Free Software Group, Inc."
+    echo "This is free software; see the source for copying conditions.  There\
+ is NO"
+    echo "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR\
+ PURPOSE."
+    echo
+    echo "Written by Dominique MASSONIE."
+}
+
 # defines the Usage for lsb_release
 Usage() {
     echo "LSB `basename $0` $SCRIPTVERSION print certain LSB (Linux\
@@ -97,14 +109,14 @@ EnhancedGetopt() {
     getopt -T >/dev/null 2>&1             # is getopt the enhanced one ?
     if [ $? = 4 ]
     then                                  # Yes, advanced args ALLOWED
-        OPT=$(getopt -o acdhirsv                                              \
-              --long all,codename,description,help,id,release,short,version   \
+        OPT=$(getopt -o acdhirsvp                                             \
+              --long all,codename,description,help,id,release,short,version,program_version   \
               -n 'lsb_release'                                                \
               -- "$@")
     else                                  # No, advanced args NOT allowed
         # convert (if needed) the enhanced options into basic ones
         MYARGS=$(echo "$@" | sed -e "/--/s/-\(-[[:alnum:]]\)[[:alnum:]]*/\1/g")
-        OPT=$(getopt -o acdhirsv                                              \
+        OPT=$(getopt -o acdhirsvp                                             \
                      -n 'lsb_release'                                         \
                      -- "$MYARGS")
     fi
@@ -122,7 +134,8 @@ EnhancedGetopt() {
         -r|--release) ARG_R="y"; shift;;
         -s|--short) ARG_S="y"; shift;;
         -v|--version) ARG_V="y"; shift;;
-        -h|--help) Usage;;
+        -p|--program_version) ARG_P="y"; shift;;
+	-h|--help) Usage;;
         --) shift; break;;
         *)  EXIT_STATUS=$ERROR_USER
             Usage;;
@@ -360,6 +373,7 @@ GetLSBInfo
 GetDistribInfo
 
 # Display requested infos (order as follow)
+[ -n "$ARG_P" ] && DisplayProgramVersion
 [ -n "$ARG_V" ] && DisplayVersion
 [ -n "$ARG_I" ] && DisplayID
 [ -n "$ARG_D" ] && DisplayDescription
