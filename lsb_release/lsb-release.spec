@@ -10,7 +10,7 @@ Version: 1.2
 Release: 1
 Prefix: /opt
 Copyright: GPL
-Source: lsb-release-1.1.tgz
+Source: lsb-release-1.2.tgz
 Group:  System/Tools
 URL:  http://www.linuxbase.org/
 Vendor: Linux Standard Base
