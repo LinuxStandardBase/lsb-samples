@@ -63,7 +63,7 @@ DESCSTR_DELI="release"
 ###############################################################################
 
 function DisplayProgramVersion() { 
-    echo "GNU ${0##*/} $SCRIPTVERSION"
+    echo "FSG `basename $0` $SCRIPTVERSION"
     echo
     echo "Copyright (C) 2000 Free Software Group, Inc."
     echo "This is free software; see the source for copying conditions.  There\
