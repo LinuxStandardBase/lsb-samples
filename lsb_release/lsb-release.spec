@@ -31,6 +31,8 @@ make
 
 %install
 make prefix=${RPM_BUILD_ROOT}%{prefix}/lsb install 
+mkdir -p ${RPM_BUILD_ROOT}%{prefix}/lsb/doc
+cp lsb-release.template ${RPM_BUILD_ROOT}%{prefix}/lsb/doc/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -38,6 +40,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %{prefix}/lsb/bin/lsb_release
 %{prefix}/lsb/man/man1/lsb_release.1.gz
+%{prefix}/lsb/doc/lsb-release.template
 
 %post
 P=$RPM_INSTALL_PREFIX
@@ -51,6 +54,9 @@ rm -f $RPM_INSTALL_PREFIX/bin/lsb_release
 rm -f $RPM_INSTALL_PREFIX/man/man1/lsb_release/lsb_release.1.gz
 
 %changelog
+* Sat Oct 21 2000 Christopher Yeoh <cyeoh@linuxcare.com>
+- Changes for 1.2 release of lsb_release
+
 * Thu Sep 28 2000 Christopher Yeoh <cyeoh@linuxcare.com>
 - Changes for 1.1 release of lsb_release
 

@@ -1,3 +1,9 @@
+lsb-release (1.2-1) unstable; urgency=low
+
+  * Update for 1.2 release of lsb_release
+
+ -- Christopher Yeoh <cyeoh@linuxcare.com.au>  Sat, 21 Oct 2000 01:22:38 +1100
+
 lsb-release (1.1-1) unstable; urgency=low
 
   * Update for 1.1 release of lsb_release
