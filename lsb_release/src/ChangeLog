@@ -1,3 +1,12 @@
+2000-12-11  Christopher Yeoh  <cyeoh@linuxcare.com.au>
+
+	* lsb_release.examples: Update documentation. Explicitly state
+	that LSB_REVISION should not be set if the distribution is not LSB 
+	compliant.
+
+	* lsb_release: Various fixes to run with less featured shells
+	and removal of dependency on awk (Dominque Massonie et al).
+
 2000-11-06  Christopher Yeoh  <cyeoh@linuxcare.com.au>
 
 	* Makefile (lsb_release.1.gz): Compress with -9
