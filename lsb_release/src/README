@@ -1,15 +1,11 @@
-This dir contains le lsb_release script and the required
-ones to build the associated Man pages.
+This dir contains the lsb_release script and the required
+ones to build the associated man pages.
 
-lsb_release : version 1.0
+lsb_release : version 1.1
 help2man    : the GNU script to build Man from --help output
 lsb_release.examples : the Man style add-on for the pages
-doman       : the small script to automate creation
 readme      : this file
-lsb_release.spec: The RPM spec file
-
-Notice: the doman script is required to modify the --version
-behavior of the lsb_release script to match help2man needs.
+Makefile    : Makefile for creating the man page
 
 Regards,
    
