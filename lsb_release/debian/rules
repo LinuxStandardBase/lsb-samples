@@ -20,7 +20,7 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
-	rm -f lsb_release.1.bz2
+	rm -f lsb_release.1.gz
 	# Add here commands to clean up after the build process.
 	dh_clean
 
@@ -32,10 +32,6 @@ install: build
 
 	# Add here commands to install the package into debian/tmp.
 	$(MAKE) install prefix=`pwd`/debian/tmp/opt/lsb
-
-	# Debian man doesn't understand bzip2'd man pages so we'll
-	# convert it to a gzipped man page
-	bzip2 -d -c debian/tmp/opt/lsb/man/man1/lsb_release.1.bz2 | gzip > debian/tmp/opt/lsb/man/man1/lsb_release.1.gz
 
 # Build architecture-independent files here.
 binary-indep: build install
