@@ -42,7 +42,7 @@
 # * Changes in 1.2
 # - Fixed more bash'isms
 # - LSB_VERSION is no longer required in /etc/lsb-release file
-# 
+#
 # * Changes in 1.1
 # - removed some bash-ism and typos
 #   Notice: script remains broken with ash because of awk issues
@@ -73,6 +73,7 @@ INFO_DISTRIB_SUFFIX="release"                 # <distrib>-<suffix>
 ALTERNATE_DISTRIB_FILE="/etc/debian_version"  # for Debian [based distrib]
 ALTERNATE_DISTRIB_NAME="Debian"               #     "
 CHECKFIRST="/etc/redhat-release"              # check it before file search
+OS_RELEASE_DISTRIB_FILE="/etc/os-release"     # for modern systems
 
 # Defines our exit codes
 EXIT_STATUS="0"                           # default = Ok :)
@@ -101,7 +102,7 @@ DESCSTR_DELI="release"
 ###############################################################################
 
 # Display Program Version for internal use (needed by help2man)
-DisplayProgramVersion() { 
+DisplayProgramVersion() {
     echo "FSG `basename $0` v$SCRIPTVERSION"
     echo
     echo "Copyright (C) 2000, 2002, 2004 Free Standards Group, Inc."
@@ -272,6 +273,20 @@ EASE ($DISTRIB_CODENAME)"
     fi
 }
 
+# Get the whole distrib information string (from '/etc/os-release')
+InitDistribInfoOSRelease() {
+    [ -z "$DISTRIB_ID" ]                                              \
+        && DISTRIB_ID="$(sed -n 's|^ID=\(.*\)$|\1|p' "$ALTERNATE_DISTRIB_FILE" | tr -d '"')"
+    [ -z "$DISTRIB_RELEASE" ]                                         \
+        && DISTRIB_RELEASE="$(sed -n 's|^VERSION_ID=\(.*\)$|\1|p' "$ALTERNATE_DISTRIB_FILE" | tr -d '"')"
+    [ -z "$DISTRIB_RELEASE" ]                                         \
+        && DISTRIB_RELEASE="$(sed -n 's|^BUILD_ID=\(.*\)$|\1|p' "$ALTERNATE_DISTRIB_FILE" | tr -d '"')"
+    [ -z "$DISTRIB_CODENAME" ]                                        \
+        && DISTRIB_CODENAME="$(sed -n 's|^VERSION_CODENAME=\(.*\)$|\1|p' "$ALTERNATE_DISTRIB_FILE" | tr -d '"')"
+    [ -z "$DISTRIB_DESCRIPTION" ]                                     \
+        && DISTRIB_DESCRIPTION="$(sed -n 's|^PRETTY_NAME=\(.*\)$|\1|p' "$ALTERNATE_DISTRIB_FILE" | tr -d '"')"
+}
+
 # Check missing and requested infos, then find the file and get infos
 GetDistribInfo() {
     NO=""  # /etc/lsb-release data are enough to reply what is requested?
@@ -282,6 +297,11 @@ GetDistribInfo() {
 
     if [ -n "$NO" ]
     then
+        if [ -f "$OS_RELEASE_DISTRIB_FILE" ]
+        then
+           InitDistribInfoOSRelease
+           return
+        fi
         if [ ! -f "$CHECKFIRST" ]
         then
             CHECKFIRST=$(find $INFO_ROOT/ -maxdepth 1                         \
@@ -399,7 +419,7 @@ else
     fi
 fi
 
-# Update args to All if requested 
+# Update args to All if requested
 if [ -n "$ARG_A" ]
 then
     [ -z "$ARG_C" ] && ARG_C="y"
