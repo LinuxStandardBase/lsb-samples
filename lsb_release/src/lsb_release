@@ -299,7 +299,7 @@ GetDistribInfo() {
 DisplayVersion() {
     if [ -z "$ARG_S" ]
     then
-        echo -e "$MSG_LSBVER$LSB_VERSION"          # at least "n/a"
+        printf "$MSG_LSBVER$LSB_VERSION\\n"          # at least "n/a"
     else
         MSG_RESULT="$MSG_RESULT${MSG_RESULT:+ }$LSB_VERSION"
     fi
@@ -323,7 +323,7 @@ DisplayID() {
     fi
     if [ -z "$ARG_S" ]
     then
-        echo -e "$MSG_DISTID$DISTRIB_ID"
+        printf "$MSG_DISTID$DISTRIB_ID\\n"
     else
         MSG_RESULT="$MSG_RESULT${MSG_RESULT:+ }$DISTRIB_ID"
     fi
@@ -338,7 +338,7 @@ DisplayDescription() {
     fi
     if [ -z "$ARG_S" ]
     then
-        echo -e "$MSG_DISTDESC$DISTRIB_DESCRIPTION"
+        printf "$MSG_DISTDESC$DISTRIB_DESCRIPTION\\n"
     else
         MSG_RESULT="$MSG_RESULT${MSG_RESULT:+ }\"$DISTRIB_DESCRIPTION\""
     fi
@@ -356,7 +356,7 @@ DisplayRelease() {
     fi
     if [ -z "$ARG_S" ]
     then
-        echo -e "$MSG_DISTREL$DISTRIB_RELEASE"
+        printf "$MSG_DISTREL$DISTRIB_RELEASE\\n"
     else
         MSG_RESULT="$MSG_RESULT${MSG_RESULT:+ }$DISTRIB_RELEASE"
     fi
@@ -374,8 +374,8 @@ DisplayCodename() {
     fi
     if [ -z "$ARG_S" ]
     then
-        echo -e "$MSG_DISTCODE$(echo "$DISTRIB_CODENAME" |                    \
-                                tr -d "[:blank:]")" # Remove blanks
+        printf "$MSG_DISTCODE$(echo "$DISTRIB_CODENAME" |                    \
+                                tr -d "[:blank:]")\\n" # Remove blanks
     else
         MSG_RESULT="$MSG_RESULT${MSG_RESULT:+ }$(echo "$DISTRIB_CODENAME" |   \
                                                  tr -d "[:blank:]")"
