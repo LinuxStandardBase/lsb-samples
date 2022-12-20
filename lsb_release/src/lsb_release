@@ -51,11 +51,11 @@
 # - changed Debian specifics, codename anticipates release num
 #
 # Description:
-# Collect information from sourceable /etc/lsb-release file (present on
-# LSB-compliant systems) : LSB_VERSION, DISTRIB_ID, DISTRIB_RELEASE,
-# DISTRIB_CODENAME, DISTRIB_DESCRIPTION (all optional)
+# Find and parse the /etc/[distro]-release file
+# Collect information from sourceable /etc/lsb-release file for overriding
+# (present on LSB-compliant systems) : LSB_VERSION, DISTRIB_ID,
+# DISTRIB_RELEASE, DISTRIB_CODENAME, DISTRIB_DESCRIPTION (all optional)
 # Then (if needed) find and add names from /etc/lsb-release.d
-# Then (if needed) find and parse the /etc/[distro]-release file
 
 
 ###############################################################################
@@ -274,13 +274,7 @@ EASE ($DISTRIB_CODENAME)"
 
 # Check missing and requested infos, then find the file and get infos
 GetDistribInfo() {
-    NO=""  # /etc/lsb-release data are enough to reply what is requested?
-    [ -n "$ARG_D" ] && [ -z "$DISTRIB_DESCRIPTION" ] && NO="y"
-    [ -z "$NO" ] && [ -n "$ARG_I" ] && [ -z "$DISTRIB_ID" ] && NO="y"
-    [ -z "$NO" ] && [ -n "$ARG_R" ] && [ -z "$DISTRIB_RELEASE" ] && NO="y"
-    [ -z "$NO" ] && [ -n "$ARG_C" ] && [ -z "$DISTRIB_CODENAME" ] && NO="y"
-
-    if [ -n "$NO" ]
+    if [ -n "$ARG_D" ] || [ -n "$ARG_I" ] || [ -n "$ARG_R" ] || [ -n "$ARG_C" ]
     then
         if [ ! -f "$CHECKFIRST" ]
         then
@@ -410,8 +404,8 @@ then
 fi
 
 # Initialization
-GetLSBInfo
 GetDistribInfo
+GetLSBInfo
 
 # Display requested infos (order as follow)
 [ -n "$ARG_V" ] && DisplayVersion
