@@ -17,7 +17,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # * Changes in 2.0
 # - Support LSB 2.0 module layout (Mats Wichmann)
@@ -188,15 +188,6 @@ EnhancedGetopt() {
 
 # Get/Init LSB infos (maybe Distrib infos too)
 GetLSBInfo() {
-    if [ -f "$INFO_ROOT/$INFO_LSB_FILE" ]
-    then
-        # should init at least LSB_VERSION
-        . "$INFO_ROOT/$INFO_LSB_FILE"
-    fi
-    if [ -z "$LSB_VERSION" ]
-    then
-	LSB_VERSION=$MSG_NA
-    else
 	# if we found LSB_VERSION, continue to look in directory
 	if [ -d "$INFO_ROOT/$INFO_LSB_DIR" ]
 	then
@@ -205,7 +196,6 @@ GetLSBInfo() {
 		LSB_VERSION=$LSB_VERSION:`basename $tag`
 	    done
 	fi
-    fi
 }
 
 # Get the whole distrib information string (from ARG $1 file)

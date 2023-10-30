@@ -15,7 +15,7 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software Foundation,
-# Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 # Written by Brendan O'Dea <bod@compusol.com.au>
 # Available from ftp://ftp.gnu.org/gnu/help2man/
@@ -173,7 +173,7 @@ my ($help_text, $version_text) = map {
 	or die "$this_program: can't get `--$_' info from $ARGV[0]\n"
 } qw(help), $opt_version_key;
 
-my $date = strftime "%B %Y", localtime;
+my $date = strftime "%B %Y", gmtime($ENV{SOURCE_DATE_EPOCH} || time);
 (my $program = $ARGV[0]) =~ s!.*/!!;
 my $package = $program;
 my $version;
